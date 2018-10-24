@@ -7,21 +7,24 @@
 #$ -m beas
 #$ -ckpt blcr
 
+set -euxo pipefail
+
 module load blcr
 module load fastqc/0.11.7
 
-# The directory where the data we want to analyze is located
 DATA_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/hts.igb.uci.edu/sborrego18102289
-# The directory where we want the result files to go
+
 QC_OUT_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/fastqc
+QC_HTML_DIR=${QC_OUT_DIR}/fastqc_html
 
-# Making the result file directory
 mkdir -p ${QC_OUT_DIR}
+mkdir -p ${QC_HTML_DIR}
 
-# Here we are performing a loop that will use each file in our data directory as input, "*" is a wild card symbol and in this context matches any file in the indicated directory
-# Each file will be processed with the program "fastqc", "\" symbol indicates that more options for the program are on the next line 
-# (--outdir) indicates the output directory for the result files
 for FILE in `find ${DATA_DIR} -name \*.gz`; do
     fastqc $FILE \
     --outdir ${QC_OUT_DIR}
+
+    mv ${QC_OUT_DIR}/*.html ${QC_HTML_DIR}
 done
+
+tar -C ${QC_OUT_DIR} -czvf ${QC_HTML_DIR}.tar.gz ${QC_HTML_DIR} 

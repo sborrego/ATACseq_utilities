@@ -5,8 +5,6 @@ module load bowtie2/2.2.7
 
 set -eoux pipefail
 
-/som/sborrego/refs/hg38_chroms_only
-
 REF_DIR=/som/sborrego/refs
 CHROMFA=${REF_DIR}/hg38
 CHR_DIR=${REF_DIR}/hg38_chroms_only

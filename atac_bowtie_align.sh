@@ -14,7 +14,6 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-
 # Provide directory name for alignment ($1) on command line
 
 module load bowtie2/2.2.7
@@ -28,7 +27,7 @@ DATA_DIR=${EXP_DIR}/"$1"
 
 ALIGN_DIR=${EXP_DIR}/alignments/"$1"
 ALIGN_MITO_DIR=${ALIGN_DIR}/mitochondrial_alignments
-UNALIGN_MITO_DIR=${ALIGN_DIR}/mitchondrial_unaligned
+UNALIGN_MITO_DIR=${ALIGN_DIR}/mitochondrial_unaligned
 
 mkdir -p ${ALIGN_DIR}
 mkdir -p ${ALIGN_MITO_DIR}
@@ -43,15 +42,8 @@ for NUMBER in `seq 1 2`; do
 		R1=${DATA_DIR}/"${PREFIX}"_1P.fq.gz
 		R2=${DATA_DIR}/"${PREFIX}"_2P.fq.gz
 
-		UNALIGNED_MITO_FILE=${UNALIGN_MITO_DIR}/${PREFIX}_mito_unaligned.fq.gz
-		ALIGNED_MITO_FILE=${ALIGN_MITO_DIR}/${PREFIX}_mito_alignment.bam
-
-		# echo ${FILE}
-		# echo ${PREFIX}
-		# echo ${R1}
-		# echo ${R2}
-		# echo ${UNALIGNED_MITO_FILE}
-		# echo ${ALIGNED_MITO_FILE}
+		UNALIGNED_MITO_FILE=${UNALIGN_MITO_DIR}/${PREFIX}_chrM_unaligned_READ%.fq.gz
+		ALIGNED_MITO_FILE=${ALIGN_MITO_DIR}/${PREFIX}_chrM_alignment.bam
 
 		echo "*** Aligning: ${PREFIX}"
 		echo "Alignment summary for ${PREFIX}" >> ${RUNLOG}
@@ -62,7 +54,6 @@ for NUMBER in `seq 1 2`; do
 		--un-conc-gz ${UNALIGNED_MITO_FILE} -1 ${R1} -2 ${R2} \
 		| samtools view -Sb - > ${ALIGNED_MITO_FILE} \
 		2>> ${RUNLOG}
-
 	done
 done
 

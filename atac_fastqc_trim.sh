@@ -12,7 +12,6 @@ set -euxo pipefail
 module load blcr
 module load fastqc/0.11.7
 
-
 EXP_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8
 TRIM_DATA=${EXP_DIR}/trim_data
 
@@ -29,5 +28,7 @@ for FILE in `find ${TRIM_DATA} -name \*.gz`; do
 
     mv ${QC_OUT_DIR}/*.html ${QC_HTML_DIR}
 done
+
+cd ${QC_OUT_DIR}
 
 tar -C ${QC_OUT_DIR} -czvf ${QC_HTML_DIR}.tar.gz ${QC_HTML_DIR} 

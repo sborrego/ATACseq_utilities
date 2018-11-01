@@ -21,7 +21,7 @@ QC_HTML_DIR=${QC_OUT_DIR}/fastqc_trim_html
 mkdir -p ${QC_OUT_DIR}
 mkdir -p ${QC_HTML_DIR}
 
-for FILE in `find ${TRIM_DATA} -name \*.gz`; do
+for FILE in `find ${TRIM_DATA} -name \*P.fq.gz`; do
     fastqc $FILE \
     --threads 8 \
     --outdir ${QC_OUT_DIR}

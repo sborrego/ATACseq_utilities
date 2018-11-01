@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/fastqc_trim.out
-#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/fastqc_trim.err 
+#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/fastqc_trim_clip.out
+#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/fastqc_trim_clip.err 
 #$ -q free64,som,asom
-#$ -pe openmp 8
+#$ -pe openmp 6
 #$ -m beas
 #$ -ckpt blcr
 
@@ -23,12 +23,10 @@ mkdir -p ${QC_HTML_DIR}
 
 for FILE in `find ${TRIM_DATA} -name \*P.fq.gz`; do
     fastqc $FILE \
-    --threads 8 \
+    --threads 6 \
     --outdir ${QC_OUT_DIR}
 
     mv ${QC_OUT_DIR}/*.html ${QC_HTML_DIR}
 done
-
-cd ${QC_OUT_DIR}
 
 tar -C ${QC_OUT_DIR} -czvf ${QC_HTML_DIR}.tar.gz ${QC_HTML_DIR} 

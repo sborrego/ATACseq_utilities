@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/fastqc/fastqc.out
-#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/fastqc/fastqc.err 
+#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/fastqc_trim.out
+#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/fastqc_trim.err 
 #$ -q free64,som,asom
 #$ -pe openmp 8
 #$ -m beas

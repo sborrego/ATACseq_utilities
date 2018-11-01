@@ -64,8 +64,8 @@ for NUMBER in `seq 1 6`; do
 	for FILE in `find ${UNALIGN_MITO_DIR} -name \*P"${NUMBER}"\*1.fq.gz`; do
 		PREFIX=`basename ${FILE} _READ1.fq.gz`
 		PREFIX2=`basename ${FILE} _chrM_unaligned_READ1.fq.gz`
-		R1=${DATA_DIR}/"${PREFIX}"_READ1.fq.gz
-		R2=${DATA_DIR}/"${PREFIX}"_READ2.fq.gz
+		R1=${UNALIGN_MITO_DIR}/"${PREFIX}"_READ1.fq.gz
+		R2=${UNALIGN_MITO_DIR}/"${PREFIX}"_READ2.fq.gz
 
 		ALIGNED_FILE=${ALIGN_CHR_DIR}/${PREFIX2}.sorted.bam
 

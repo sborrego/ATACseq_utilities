@@ -9,6 +9,12 @@
 
 set -euxo pipefail
 
+if [ $# -ne 1 ]; then
+    echo "usage: data_dir"
+    exit 1
+fi
+
+
 # Provide directory name for alignment ($1) on command line
 
 module load bowtie2/2.2.7

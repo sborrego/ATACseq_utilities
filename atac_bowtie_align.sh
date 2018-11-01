@@ -30,7 +30,7 @@ mkdir -p ${UNALIGN_MITO_DIR}
 
 for NUMBER in `seq 1 2`; do
 	for FILE in `find ${DATA_DIR} -name \*P"${NUMBER}"\*1P.fq.gz`; do
-		PREFIX=`basename ${FILE} 1P.fq.gz`
+		PREFIX=`basename ${FILE} _1P.fq.gz`
 		R1=${DATA_DIR}/"${PREFIX}"_1P.fq.gz
 		R2=${DATA_DIR}/"${PREFIX}"_2P.fq.gz
 

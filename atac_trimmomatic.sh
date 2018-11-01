@@ -7,7 +7,7 @@
 #$ -m beas            
 #$ -ckpt blcr         
 
-set -euxo pipefail
+# set -euxo pipefail
 
 module load blcr
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
@@ -28,17 +28,12 @@ TRIMMER="CROP:93 HEADCROP:7 MINLEN:36"
 for NUMBER in `seq 1 6`; do
 	for FILE in `find ${DATA_DIR} -name \*P"${NUMBER}"\*READ1-Sequences.txt.gz`; do
 		PREFIX=`basename ${FILE} -READ1-Sequences.txt.gz`
-		echo $PREFIX
-
 		R1=${DATA_DIR}/"${PREFIX}"-READ1-Sequences.txt.gz
 		R2=${DATA_DIR}/"${PREFIX}"-READ2-Sequences.txt.gz
 
-		R1_PREFIX=`basename ${R1} -Sequences.txt.gz`
-		R2_PREFIX=`basename ${R2} -Sequences.txt.gz`
-
 		OUTPUT=${TRIM_DATA}/${PREFIX}_trimmed.fq.gz
 
-	    echo "*** ${FILE} Summary" >> $RUNLOG
+	    echo "*** ${PREFIX} Summary" >> $RUNLOG
 
 	    java -jar ${TRIMMOMATIC_DIR} \
 	    PE \

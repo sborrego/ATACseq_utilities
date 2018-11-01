@@ -45,20 +45,6 @@ for NUMBER in `seq 1 6`; do
 done
 
 
-bowtie2 -x ${CHR_MITO} --un-conc-gz ${UNALIGN_MITO}/${PREFIX} -1 YOUR_READ1.fq -2 YOUR_READ2.fq | samtools view -Sb -> mito.bam
+# bowtie2 -x ${CHR_MITO} --un-conc-gz ${UNALIGN_MITO}/${PREFIX} -1 YOUR_READ1.fq -2 YOUR_READ2.fq | samtools view -Sb -> mito.bam
 
-bowtie2 --threads 32 -x GENOME_CHROMS -1 unaln_1.fq -2 unaln_2.fq | samtools view -Sb -> YOUR_sample.bam
-
-
-
-mkdir -p ${QC_OUT_DIR}
-mkdir -p ${QC_HTML_DIR}
-
-for FILE in `find ${DATA_DIR} -name \*.gz`; do
-    fastqc $FILE \
-    --outdir ${QC_OUT_DIR}
-
-    mv ${QC_OUT_DIR}/*.html ${QC_HTML_DIR}
-done
-
-tar -C ${QC_OUT_DIR} -czvf ${QC_HTML_DIR}.tar.gz ${QC_HTML_DIR} 
+# bowtie2 --threads 32 -x GENOME_CHROMS -1 unaln_1.fq -2 unaln_2.fq | samtools view -Sb -> YOUR_sample.bam

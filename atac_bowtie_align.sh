@@ -21,26 +21,28 @@ EXP_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8
 DATA_DIR=${EXP_DIR}/"$1"
 
 ALIGN_DIR=${EXP_DIR}/alignments/"$1"
-ALIGN_MITO=${ALIGN_DIR}/mitochondrial_alignments
-UNALIGN_MITO=${ALIGN_DIR}/mitchondrial_unaligned
-
+ALIGN_MITO_DIR=${ALIGN_DIR}/mitochondrial_alignments
+UNALIGN_MITO_DIR=${ALIGN_DIR}/mitchondrial_unaligned
 
 mkdir -p ${ALIGN_DIR}
+mkdir -p ${ALIGN_MITO_DIR}
+mkdir -p ${UNALIGN_MITO_DIR}
 
-
-for NUMBER in `seq 1 6`; do
+for NUMBER in `seq 1 2`; do
 	for FILE in `find ${DATA_DIR} -name \*P"${NUMBER}"\*1P.fq.gz`; do
 		PREFIX=`basename ${FILE} 1P.fq.gz`
 		R1=${DATA_DIR}/"${PREFIX}"_1P.fq.gz
 		R2=${DATA_DIR}/"${PREFIX}"_2P.fq.gz
 
-		OUTPUT=${TRIM_DATA}/${PREFIX}_trimmed_clip.fq.gz
+		UNALIGNED_MITO_FILE=${UNALIGN_MITO_DIR}/${PREFIX}_mito_unaligned.fq.gz
+		ALIGNED_MITO_FILE=${ALIGN_MITO_DIR}/${PREFIX}_mito_alignment.bam
 
-
+		echo ${FILE}
+		echo ${PREFIX}
 		echo ${R1}
 		echo ${R2}
-		echo ${OUTPUT}
-		echo ${UNALIGN_MITO}/${PREFIX}
+		echo ${UNALIGNED_MITO_FILE}
+		echo ${ALIGNED_MITO_FILE}
 	done
 done
 

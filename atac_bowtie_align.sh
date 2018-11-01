@@ -60,6 +60,8 @@ echo "Run by `whoami` on `date`" > ${RUNLOG}
 
 ALIGN_CHR_DIR=${ALIGN_DIR}/chr_only_alignments
 
+mkdir -p ${ALIGN_CHR_DIR}
+
 for NUMBER in `seq 1 6`; do
 	for FILE in `find ${UNALIGN_MITO_DIR} -name \*P"${NUMBER}"\*1.fq.gz`; do
 		PREFIX=`basename ${FILE} _READ1.fq.gz`

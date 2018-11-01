@@ -72,6 +72,7 @@ for NUMBER in `seq 1 6`; do
 		bowtie2 \
 		--threads 32 \
 		-x ${GENOME_CHROMS} \
+		-N 1 \
 		-1 ${R1} -2 ${R2} \
 		| samtools view -Sb - | samtools sort -@ 32 - > ${ALIGNED_FILE}
 	done

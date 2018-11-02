@@ -63,7 +63,9 @@ bowtie2 \
 --un-conc-gz ${UNALIGNED_MITO_FILE} \
 -1 ${READ_1} -2 ${READ_2} \
 | samtools view -Sb - > ${ALIGNED_MITO_FILE} \
-&>> ${RUNLOG}
+&> ${RUNLOG}
+
+
 
 # bowtie2 -x ${CHR_MITO} --un-conc-gz ${UNALIGNED_MITO_FILE} -1 ${R1} -2 ${R2} | samtools view -Sb -> mito.bam
 # bowtie2 --threads 32 -x GENOME_CHROMS -1 unaln_1.fq -2 unaln_2.fq | samtools view -Sb -> YOUR_sample.bam

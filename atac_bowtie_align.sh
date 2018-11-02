@@ -9,8 +9,8 @@
 
 set -euxo pipefail
 
-if [ $# -ne 1 ]; then
-    echo "usage: data_dir"
+if [ $# -ne 3 ]; then
+    echo "usage: data_dir seq_nstart seq_nstop"
     exit 1
 fi
 
@@ -39,7 +39,7 @@ echo "Run by `whoami` on `date`" > ${RUNLOG}
 FLAG=${ALIGN_DIR}/alignment_errors.flagstat
 echo "Run by `whoami` on `date`" > ${FLAG}
 
-for NUMBER in `seq 1 6`; do
+for NUMBER in `seq $2 $3`; do
 	for FILE in `find ${DATA_DIR} -name \*P"${NUMBER}"\*1P.fq.gz`; do
 		PREFIX=`basename ${FILE} _1P.fq.gz`
 		R1=${DATA_DIR}/"${PREFIX}"_1P.fq.gz
@@ -65,7 +65,7 @@ ALIGN_CHR_DIR=${ALIGN_DIR}/chr_only_alignments
 
 mkdir -p ${ALIGN_CHR_DIR}
 
-for NUMBER in `seq 1 6`; do
+for NUMBER in `seq $2 $3`; do
 	for FILE in `find ${UNALIGN_MITO_DIR} -name \*P"${NUMBER}"\*1.fq.gz`; do
 		
 		PREFIX=`basename ${FILE} _READ1.fq.gz`

@@ -79,7 +79,7 @@ for NUMBER in `seq 1 6`; do
 		-x ${GENOME_CHROMS} \
 		-N 1 \
 		-1 ${R1} -2 ${R2} \
-		| samtools view -Sb - | samtools sort -@ 32 -o ${BAM_FILE} -O bam - 
+		| samtools view -Sb - | samtools sort -@ 32 -o ${BAM_FILE} -O bam -T ${PREFIX2} - 
 
 		samtools index ${BAM_FILE}
 		samtools flagstat ${BAM_FILE} >> ${FLAG}

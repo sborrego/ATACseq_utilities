@@ -1,5 +1,7 @@
 #!/bin/bash
     
+#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_mito_alignment_clip.out
+#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_mito_alignment_clip.err
 #$ -q free64,som,asom,pub64 
 #$ -pe make 16
 #$ -R y 
@@ -36,10 +38,13 @@ mkdir -p ${ALIGN_MITO_DIR}
 mkdir -p ${UNALIGN_MITO_DIR}
 
 RUNLOG=${ALIGN_DIR}/runlog_align_${SGE_TASK_ID}.txt
-echo "Run by `whoami` on `date`" > ${RUNLOG}
+echo "Run by `whoami` on `date`" >> ${RUNLOG}
+
+ERRLOG=${ALIGN_DIR}/errlog_align_${SGE_TASK_ID}.txt
+echo "Run by `whoami` on `date`" >> ${ERRLOG}
 
 FLAG=${ALIGN_DIR}/alignment_errors_${SGE_TASK_ID}.flagstat
-echo "Run by `whoami` on `date`" > ${FLAG}
+echo "Run by `whoami` on `date`" >> ${FLAG}
 
 LIST_1=${DATA_DIR}/read1_list.txt
 LIST_2=${DATA_DIR}/read2_list.txt
@@ -63,8 +68,8 @@ bowtie2 \
 --un-conc-gz ${UNALIGNED_MITO_FILE} \
 -1 ${READ_1} -2 ${READ_2} \
 | samtools view -Sb - > ${ALIGNED_MITO_FILE} \
-&> ${RUNLOG}
-
+2>> ${RUNLOG} \
+1>> ${ERRLOG}
 
 
 # bowtie2 -x ${CHR_MITO} --un-conc-gz ${UNALIGNED_MITO_FILE} -1 ${R1} -2 ${R2} | samtools view -Sb -> mito.bam

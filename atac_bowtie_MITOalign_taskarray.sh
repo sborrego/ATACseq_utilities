@@ -10,7 +10,6 @@
 #$ -ckpt blcr         
 
 set -euxo pipefail
-SGE_TASK_ID=1
 
 if [ $# -ne 1 ]; then
     echo "usage: data_dir"
@@ -37,14 +36,11 @@ mkdir -p ${ALIGN_DIR}
 mkdir -p ${ALIGN_MITO_DIR}
 mkdir -p ${UNALIGN_MITO_DIR}
 
-RUNLOG=${ALIGN_DIR}/runlog_align_${SGE_TASK_ID}.txt
+RUNLOG=${ALIGN_DIR}/runlog_mito_align_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" >> ${RUNLOG}
 
-ERRLOG=${ALIGN_DIR}/errlog_align_${SGE_TASK_ID}.txt
+ERRLOG=${ALIGN_DIR}/errlog_mito_align_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" >> ${ERRLOG}
-
-FLAG=${ALIGN_DIR}/alignment_errors_${SGE_TASK_ID}.flagstat
-echo "Run by `whoami` on `date`" >> ${FLAG}
 
 LIST_1=${DATA_DIR}/read1_list.txt
 LIST_2=${DATA_DIR}/read2_list.txt

@@ -1,7 +1,7 @@
 #!/bin/bash
     
-#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_alignment.out
-#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_alignment.err
+#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_alignment_clip.out
+#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_alignment_clip.err
 #$ -q free64,som,asom 
 #$ -pe openmp 32  
 #$ -m beas            
@@ -33,10 +33,10 @@ mkdir -p ${ALIGN_DIR}
 mkdir -p ${ALIGN_MITO_DIR}
 mkdir -p ${UNALIGN_MITO_DIR}
 
-RUNLOG=${ALIGN_DIR}/runlog_align_${1}.txt
+RUNLOG=${ALIGN_DIR}/runlog_align_${1}_${2}_${3}.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
 
-FLAG=${ALIGN_DIR}/alignment_errors.flagstat
+FLAG=${ALIGN_DIR}/alignment_errors_${1}_${2}_${3}.flagstat
 echo "Run by `whoami` on `date`" > ${FLAG}
 
 for NUMBER in `seq $2 $3`; do
@@ -49,7 +49,7 @@ for NUMBER in `seq $2 $3`; do
 		ALIGNED_MITO_FILE=${ALIGN_MITO_DIR}/${PREFIX}_chrM_alignment.bam
 
 		echo "*** Aligning: ${PREFIX}"
-		echo "Alignment summary for ${PREFIX}" >> ${RUNLOG}
+		echo "Mitochondrial Alignment Summary for ${PREFIX}" >> ${RUNLOG}
 
 		bowtie2 \
 		--threads 32 \
@@ -76,7 +76,7 @@ for NUMBER in `seq $2 $3`; do
 		BAM_FILE=${ALIGN_CHR_DIR}/${PREFIX2}.sorted.bam
 
 		echo "*** Aligning: ${PREFIX}"
- 		echo "Alignment summary for ${PREFIX}" >> ${RUNLOG}
+ 		echo "Chromosome Only Alignment Summary for ${PREFIX}" >> ${RUNLOG}
 
 		bowtie2 \
 		--threads 32 \

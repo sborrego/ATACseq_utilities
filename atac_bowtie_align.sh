@@ -36,6 +36,9 @@ mkdir -p ${UNALIGN_MITO_DIR}
 RUNLOG=${ALIGN_DIR}/runlog_align_${1}.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
 
+FLAG=${ALIGN_DIR}/alignment_errors.flagstat
+echo "Run by `whoami` on `date`" > ${FLAG}
+
 # for NUMBER in `seq 1 6`; do
 # 	for FILE in `find ${DATA_DIR} -name \*P"${NUMBER}"\*1P.fq.gz`; do
 # 		PREFIX=`basename ${FILE} _1P.fq.gz`
@@ -69,14 +72,18 @@ for NUMBER in `seq 1 6`; do
 		R1=${UNALIGN_MITO_DIR}/"${PREFIX}"_READ1.fq.gz
 		R2=${UNALIGN_MITO_DIR}/"${PREFIX}"_READ2.fq.gz
 
-		ALIGNED_FILE=${ALIGN_CHR_DIR}/${PREFIX2}.sorted.bam
+		BAM_FILE=${ALIGN_CHR_DIR}/${PREFIX2}.sorted.bam
 
 		bowtie2 \
 		--threads 32 \
 		-x ${GENOME_CHROMS} \
 		-N 1 \
 		-1 ${R1} -2 ${R2} \
-		| samtools view -Sb - | samtools sort -@ 32 - > ${ALIGNED_FILE}
+		| samtools view -Sb - | samtools sort -@ 32 -o ${BAM_FILE} -O bam - 
+
+		samtools index ${BAM_FILE}
+		samtools flagstat ${BAM_FILE} >> ${FLAG}
+	
 	done
 done
 

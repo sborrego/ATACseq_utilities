@@ -1,7 +1,7 @@
 #!/bin/bash
     
-#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/mito_unalign.out
-#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/mito_unalign.err
+#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_alignment.out
+#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_alignment.err
 #$ -q free64,som,asom 
 #$ -pe openmp 32  
 #$ -m beas            
@@ -39,27 +39,27 @@ echo "Run by `whoami` on `date`" > ${RUNLOG}
 FLAG=${ALIGN_DIR}/alignment_errors.flagstat
 echo "Run by `whoami` on `date`" > ${FLAG}
 
-# for NUMBER in `seq 1 6`; do
-# 	for FILE in `find ${DATA_DIR} -name \*P"${NUMBER}"\*1P.fq.gz`; do
-# 		PREFIX=`basename ${FILE} _1P.fq.gz`
-# 		R1=${DATA_DIR}/"${PREFIX}"_1P.fq.gz
-# 		R2=${DATA_DIR}/"${PREFIX}"_2P.fq.gz
+for NUMBER in `seq 1 6`; do
+	for FILE in `find ${DATA_DIR} -name \*P"${NUMBER}"\*1P.fq.gz`; do
+		PREFIX=`basename ${FILE} _1P.fq.gz`
+		R1=${DATA_DIR}/"${PREFIX}"_1P.fq.gz
+		R2=${DATA_DIR}/"${PREFIX}"_2P.fq.gz
 
-# 		UNALIGNED_MITO_FILE=${UNALIGN_MITO_DIR}/${PREFIX}_chrM_unaligned_READ%.fq.gz
-# 		ALIGNED_MITO_FILE=${ALIGN_MITO_DIR}/${PREFIX}_chrM_alignment.bam
+		UNALIGNED_MITO_FILE=${UNALIGN_MITO_DIR}/${PREFIX}_chrM_unaligned_READ%.fq.gz
+		ALIGNED_MITO_FILE=${ALIGN_MITO_DIR}/${PREFIX}_chrM_alignment.bam
 
-# 		echo "*** Aligning: ${PREFIX}"
-# 		echo "Alignment summary for ${PREFIX}" >> ${RUNLOG}
+		echo "*** Aligning: ${PREFIX}"
+		echo "Alignment summary for ${PREFIX}" >> ${RUNLOG}
 
-# 		bowtie2 \
-# 		--threads 32 \
-# 		-x ${CHR_MITO} \
-# 		--un-conc-gz ${UNALIGNED_MITO_FILE} \
-# 		-1 ${R1} -2 ${R2} \
-# 		| samtools view -Sb - > ${ALIGNED_MITO_FILE} \
-# 		2>> ${RUNLOG}
-# 	done
-# done
+		bowtie2 \
+		--threads 32 \
+		-x ${CHR_MITO} \
+		--un-conc-gz ${UNALIGNED_MITO_FILE} \
+		-1 ${R1} -2 ${R2} \
+		| samtools view -Sb - > ${ALIGNED_MITO_FILE} \
+		2>> ${RUNLOG}
+	done
+done
 
 ALIGN_CHR_DIR=${ALIGN_DIR}/chr_only_alignments
 
@@ -67,12 +67,16 @@ mkdir -p ${ALIGN_CHR_DIR}
 
 for NUMBER in `seq 1 6`; do
 	for FILE in `find ${UNALIGN_MITO_DIR} -name \*P"${NUMBER}"\*1.fq.gz`; do
+		
 		PREFIX=`basename ${FILE} _READ1.fq.gz`
 		PREFIX2=`basename ${FILE} _chrM_unaligned_READ1.fq.gz`
 		R1=${UNALIGN_MITO_DIR}/"${PREFIX}"_READ1.fq.gz
 		R2=${UNALIGN_MITO_DIR}/"${PREFIX}"_READ2.fq.gz
 
 		BAM_FILE=${ALIGN_CHR_DIR}/${PREFIX2}.sorted.bam
+
+		echo "*** Aligning: ${PREFIX}"
+ 		echo "Alignment summary for ${PREFIX}" >> ${RUNLOG}
 
 		bowtie2 \
 		--threads 32 \
@@ -86,7 +90,6 @@ for NUMBER in `seq 1 6`; do
 	
 	done
 done
-
 
 # bowtie2 -x ${CHR_MITO} --un-conc-gz ${UNALIGNED_MITO_FILE} -1 ${R1} -2 ${R2} | samtools view -Sb -> mito.bam
 # bowtie2 --threads 32 -x GENOME_CHROMS -1 unaln_1.fq -2 unaln_2.fq | samtools view -Sb -> YOUR_sample.bam

@@ -8,6 +8,7 @@
 #$ -ckpt blcr         
 
 set -euxo pipefail
+SGE_TASK_ID=1
 
 if [ $# -ne 1 ]; then
     echo "usage: data_dir"
@@ -33,11 +34,8 @@ mkdir -p ${ALIGN_CHR_DIR}
 RUNLOG=${ALIGN_DIR}/runlog_chrOnly_align_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
 
-ERRLOG=${ALIGN_DIR}/errlog_chrOnly_align_${SGE_TASK_ID}.txt
-echo "Run by `whoami` on `date`" >> ${ERRLOG}
-
 FLAG=${ALIGN_DIR}/alignment_chrOnly_errors_${SGE_TASK_ID}.flagstat
-echo "Run by `whoami` on `date`" >> ${FLAG}
+echo "Run by `whoami` on `date`" > ${FLAG}
 
 # File for lists of files to be processed
 LIST_1=${UNALIGN_MITO_DIR}/read1_list.txt
@@ -61,8 +59,7 @@ bowtie2 \
 -N 1 \
 -1 ${READ_1} -2 ${READ_2} \
 | samtools view -Sb - | samtools sort -@ 16 -o ${BAM_FILE} -O bam -T ${PREFIX} - \
-2>> ${RUNLOG} \
-1>> ${ERRLOG}
+2>> ${RUNLOG}
 
 samtools index ${BAM_FILE}
 samtools flagstat ${BAM_FILE} >> ${FLAG}

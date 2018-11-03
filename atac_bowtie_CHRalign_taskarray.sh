@@ -8,7 +8,6 @@
 #$ -ckpt blcr         
 
 set -euxo pipefail
-SGE_TASK_ID=1
 
 if [ $# -ne 1 ]; then
     echo "usage: data_dir"

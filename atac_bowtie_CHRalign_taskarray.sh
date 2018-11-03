@@ -1,5 +1,7 @@
 #!/bin/bash
     
+#$ -o /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_chr_alignment_clip.out
+#$ -e /som/sborrego/201810_ATACSEQ_MB468_R8/qsub_reports/bowtie_chr_alignment_clip.err
 #$ -q free64,som,asom,pub64 
 #$ -pe make 16
 #$ -R y 

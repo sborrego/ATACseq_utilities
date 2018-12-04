@@ -5,7 +5,7 @@
 #$ -q free64,som,asom,pub64 
 #$ -pe make 16
 #$ -R y 
-#$ -t 1-12            
+#$ -t 1-6            
 #$ -ckpt blcr  
 
 # Including the option on SGE to email you will cause trouble if you have too many samples. 
@@ -32,11 +32,8 @@ RESULTS=${EXP_DIR}/bbmerge_results
 mkdir -p ${RESULTS}
 
 # Logs to keep track of things
-RUNLOG=${RESULTS}/runlog_chrOnly_align_${SGE_TASK_ID}.txt
+RUNLOG=${RESULTS}/runlog_bbmerge_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" >> ${RUNLOG}
-
-FLAG=${RESULTS}/alignment_chrOnly_errors_${SGE_TASK_ID}.flagstat
-echo "Run by `whoami` on `date`" >> ${FLAG}
 
 # File for lists of files to be processed
 LIST_1=${DATA_DIR}/read1_list.txt
@@ -46,6 +43,7 @@ LIST_2=${DATA_DIR}/read2_list.txt
 READ_1=${DATA_DIR}/`head -n $SGE_TASK_ID $LIST_1 | tail -n 1`
 READ_2=${DATA_DIR}/`head -n $SGE_TASK_ID $LIST_2 | tail -n 1`
 
+echo $READ_1 $READ_2 >> ${RUNLOG}
 $bbmerge \
 in1=$READ_1 in2=$READ_2 \
-outa=${RESULTS}/adapters_${SGE_TASK_ID}.fa
+outa=${RESULTS}/adapters_${SGE_TASK_ID}.fa >${RUNLOG} 2>&1

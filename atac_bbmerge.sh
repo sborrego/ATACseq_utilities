@@ -35,7 +35,7 @@ mkdir -p ${RESULTS}
 RUNLOG=${RESULTS}/runlog_chrOnly_align_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" >> ${RUNLOG}
 
-FLAG=${RESULS}/alignment_chrOnly_errors_${SGE_TASK_ID}.flagstat
+FLAG=${RESULTS}/alignment_chrOnly_errors_${SGE_TASK_ID}.flagstat
 echo "Run by `whoami` on `date`" >> ${FLAG}
 
 # File for lists of files to be processed

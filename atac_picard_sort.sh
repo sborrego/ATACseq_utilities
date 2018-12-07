@@ -9,6 +9,9 @@
 #$ -m beas            
 #$ -ckpt blcr  
 
+set -euxo pipefail
+
+module load java/1.7
 module load picard-tools/1.96
 module load samtools/1.0
 
@@ -25,8 +28,8 @@ mkdir -p ${SORTED_DIR}
 
 RUNLOG=${SORTED_DIR}/runlog_samsort_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
-echo ${BAM_INPUT}
-echo ${BAM_OUTPUT}
+echo ${BAM_INPUT} > ${RUNLOG}
+echo ${BAM_OUTPUT} > ${RUNLOG}
 
 java -Xmx2g -jar SORTSAM \
 INPUT=${BAM_INPUT} \

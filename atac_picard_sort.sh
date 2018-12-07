@@ -31,7 +31,7 @@ echo "Run by `whoami` on `date`" > ${RUNLOG}
 echo ${BAM_INPUT} > ${RUNLOG}
 echo ${BAM_OUTPUT} > ${RUNLOG}
 
-java -Xmx2g -jar SORTSAM \
+java -Xmx2g -jar ${SORTSAM} \
 INPUT=${BAM_INPUT} \
 OUTPUT=${SORTED_DIR}/${BAM_OUTPUT}.sorted.bam \
 SORT_ORDER=coordinate \

@@ -17,7 +17,7 @@ module load samtools/1.0
 
 SORTSAM=/data/apps/picard-tools/1.96/SortSam.jar
 BAM_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_trim_clip_noSORT/chr_only_noSORT_alignments
-BAM_LIST=bam_list.txt
+BAM_LIST=${BAM_DIR}/bam_list.txt
 
 BAM_INPUT=${BAM_DIR}/`head -n $SGE_TASK_ID $BAM_LIST | tail -n 1`
 BAM_OUTPUT=`head -n $SGE_TASK_ID $BAM_LIST | tail -n 1 | cut -d_ -f1`

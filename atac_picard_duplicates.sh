@@ -18,7 +18,7 @@ module load samtools/1.0
 MARK_DUPS=/data/apps/picard-tools/1.96/MarkDuplicates.jar
 
 BAM_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_chr_trim_clip_SORTED
-BAM_LIST=sorted_bam_list.txt
+BAM_LIST=${BAM_DIR}/sorted_bam_list.txt
 NO_DUPS_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_final_181213
 
 mkdir -p ${NO_DUPS_DIR}

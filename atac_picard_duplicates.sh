@@ -11,6 +11,7 @@
 
 set -euxo pipefail
 
+module load java/1.7
 module load picard-tools/1.96
 module load samtools/1.0
 

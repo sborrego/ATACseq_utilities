@@ -20,8 +20,10 @@ MARK_DUPS=/data/apps/picard-tools/1.96/MarkDuplicates.jar
 BAM_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_chr_trim_clip_SORTED
 BAM_LIST=${BAM_DIR}/sorted_bam_list.txt
 NO_DUPS_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_final_181213
+HIST_DIR=${NO_DUPS_DIR}/histograms
 
 mkdir -p ${NO_DUPS_DIR}
+mkdir -p ${HIST_DIR}
 
 BAM_INPUT=${BAM_DIR}/`head -n $SGE_TASK_ID $BAM_LIST | tail -n 1`
 BAM_OUTPUT=`head -n $SGE_TASK_ID $BAM_LIST | tail -n 1 | cut -d. -f1`
@@ -29,5 +31,6 @@ BAM_OUTPUT=`head -n $SGE_TASK_ID $BAM_LIST | tail -n 1 | cut -d. -f1`
 java -Xmx2g -jar ${MARK_DUPS} \
 INPUT=${BAM_INPUT} \
 OUTPUT=${NO_DUPS_DIR}/${BAM_OUTPUT}.sorted.nodup.bam \
+HISTOGRAM_FILE=${HIST_DIR}/${BAM_OUTPUT}.insert_size_histogram.pdf \
 METRICS_FILE=${NO_DUPS_DIR}/${BAM_OUTPUT}.marked_dup_metrics.txt \
 REMOVE_DUPLICATES=true

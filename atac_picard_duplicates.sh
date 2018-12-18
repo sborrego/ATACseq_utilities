@@ -25,9 +25,11 @@ BAM_LIST=${BAM_DIR}/sorted_bam_list.txt
 
 # Output directories
 NO_DUPS_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_final_181213
+METRICS_DIR=${NO_DUPS_DIR}/metrics
 HIST_DIR=${NO_DUPS_DIR}/histograms
 
 mkdir -p ${NO_DUPS_DIR}
+mkdir -p ${METRICS_DIR}
 mkdir -p ${HIST_DIR}
 
 # Building file names
@@ -46,7 +48,7 @@ echo "Run by `whoami` on `date`" >> ${FLAG}
 java -Xmx2g -jar ${MARK_DUPS} \
 	INPUT=${BAM_INPUT} \
 	OUTPUT=${BAM_FINAL} \
-	METRICS_FILE=${NO_DUPS_DIR}/${BAM_OUTPUT}.marked_dup_metrics.txt \
+	METRICS_FILE=${METRICS_DIR}/${BAM_OUTPUT}.markDup_metrics.txt \
 	REMOVE_DUPLICATES=true 2>> ${RUNLOG}
 
 samtools index ${BAM_FINAL} 

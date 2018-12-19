@@ -68,7 +68,7 @@ findPeaks ${TAG_DIR}/${INPUT_PREFIX} \
 	-fdr 0.01 2>> ${RUNLOG}
 
 # Merge files with open regions of 200bp and 500bp
-bedops -merge \
+bedops --merge \
 ${PEAK_200}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak200.txt \
 ${PEAK_500}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak500.txt > ${PEAK_MERGE}/${INPUT_PREFIX}_bedops.merge.txt 2>> ${RUNLOG}
 

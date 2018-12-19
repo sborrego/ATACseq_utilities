@@ -39,27 +39,27 @@ INPUT=`head -n $SGE_TASK_ID $INPUT_LIST | tail -n 1`
 INPUT_PREFIX=`head -n $SGE_TASK_ID $INPUT_LIST | tail -n 1 | cut -d/ -f7 | cut -d. -f1`
 
 # Make one tag directory per bam file
-mkdir -p ${TAG_DIR}/${PREFIX}
+mkdir -p ${TAG_DIR}/${INPUT_PREFIX}
 makeTagDirectory ${TAG_DIR}/${INPUT_PREFIX} ${INPUT}
 
 # Find open regions aroud 200 
 findPeaks ${TAG_DIR}/${INPUT_PREFIX} \
-	-o ${PEAK_200}/${PREFIX}/${INPUT_PREFIX}_peak200.txt \
+	-o ${PEAK_200}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak200.txt \
 	-style factor \
 	-size 200 \
 	-fdr 0.01
 
 # Find open regions aroud 500 
 findPeaks ${TAG_DIR}/${INPUT_PREFIX} \
-	-o ${PEAK_500}/${PREFIX}/${INPUT_PREFIX}_peak500.txt \
+	-o ${PEAK_500}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak500.txt \
 	-style factor \
 	-size 500 \
 	-fdr 0.01
 
 # Merge files with open regions of 200bp and 500bp
 bedops -merge \
-${PEAK_200}/${PREFIX}/${INPUT_PREFIX}_peak200.txt \
-${PEAK_500}/${PREFIX}/${INPUT_PREFIX}_peak500.txt > ${PEAK_MERGE}/${INPUT_PREFIX}_bedops.merge.txt
+${PEAK_200}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak200.txt \
+${PEAK_500}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak500.txt > ${PEAK_MERGE}/${INPUT_PREFIX}_bedops.merge.txt
 
 # Sort merged files
 sortBed -i ${PEAK_MERGE}/${INPUT_PREFIX}_bedops.merge.txt > ${PEAK_MERGE}/${INPUT_PREFIX}_bedops.merge.sorted.txt

@@ -43,14 +43,14 @@ mkdir -p ${TAG_DIR}/${PREFIX}
 makeTagDirectory ${TAG_DIR}/${INPUT_PREFIX} ${INPUT}
 
 # Find open regions aroud 200 
-findPeaks ${TAG_DIR}/{INPUT_PREFIX} \
+findPeaks ${TAG_DIR}/${INPUT_PREFIX} \
 	-o ${PEAK_200}/${PREFIX}/${INPUT_PREFIX}_peak200.txt \
 	-style factor \
 	-size 200 \
 	-fdr 0.01
 
 # Find open regions aroud 500 
-findPeaks ${TAG_DIR}/{INPUT_PREFIX} \
+findPeaks ${TAG_DIR}/${INPUT_PREFIX} \
 	-o ${PEAK_500}/${PREFIX}/${INPUT_PREFIX}_peak500.txt \
 	-style factor \
 	-size 500 \

@@ -9,6 +9,8 @@
 #$ -m beas            
 #$ -ckpt blcr  
 
+set -euxo pipefail
+
 module load samtools/1.9
 module load bedops/2.4.14
 module load bedtools/2.23.0

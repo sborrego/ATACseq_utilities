@@ -39,8 +39,8 @@ INPUT=`head -n $SGE_TASK_ID $INPUT_LIST | tail -n 1`
 INPUT_PREFIX=`head -n $SGE_TASK_ID $INPUT_LIST | tail -n 1 | cut -d/ -f7 | cut -d. -f1`
 
 # Make one tag directory per bam file
-mkdir -p ${TAG_DIR}/{PREFIX}
-makeTagDirectory ${TAG_DIR}/{INPUT_PREFIX} ${INPUT}
+mkdir -p ${TAG_DIR}/${PREFIX}
+makeTagDirectory ${TAG_DIR}/${INPUT_PREFIX} ${INPUT}
 
 # Find open regions aroud 200 
 findPeaks ${TAG_DIR}/{INPUT_PREFIX} \

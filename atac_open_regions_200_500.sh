@@ -33,6 +33,7 @@ mkdir -p ${PEAKS_DIR}
 mkdir -p ${PEAK_200}
 mkdir -p ${PEAK_500}
 mkdir -p ${PEAK_MERGE}
+mkdir -p ${PEAK_FINAL}
 mkdir -p ${RUNLOG_DIR}
 
 # for FILE in *.bam; do echo `pwd`/${FILE} >> sorted_nodup_bam_list.txt; done
@@ -79,3 +80,6 @@ sortBed \
 # Merge single sorted file - results in final peak list
 bedtools merge \
 -i ${PEAK_MERGE}/${INPUT_PREFIX}_bedops.merge.sorted.txt > ${PEAK_FINAL}/${INPUT_PREFIX}_finalpeaks.txt 2>> ${RUNLOG}
+
+
+awk '{OFS="\t"} {if ($3<$2) print $1,$3,$2 ; else print $0}' file.bed > file_fixed.bed 

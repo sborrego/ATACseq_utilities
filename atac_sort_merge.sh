@@ -58,9 +58,9 @@ awk '{OFS="\t"} {if ($3<$2) print $1,$3,$2 ; else print $0}' ${PEAK_500}/${INPUT
 sort -k1,1 -k2,2n \
 ${PEAK_200}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak200.bed \
 ${PEAK_500}/${INPUT_PREFIX}/${INPUT_PREFIX}_peak500.bed \
-| mergeBed -c 4,5 -o collapse,sum -i - > ${PEAK_MERGE}/${INPUT_PREFIX}.merge.bed 2>> ${RUNLOG}
+| mergeBed -c 4,5,6 -o collapse,sum,distinct -i - > ${PEAK_MERGE}/${INPUT_PREFIX}.merge.bed 2>> ${RUNLOG}
 
 # Merge single sorted file - results in final peak list
-bedtools merge -c 4,5 -o collapse,sum \
+bedtools merge -c 4,5,6 -o collapse,sum,distinct \
 -i ${PEAK_MERGE}/${INPUT_PREFIX}.merge.bed > ${PEAK_FINAL}/${INPUT_PREFIX}.finalpeaks.bed 2>> ${RUNLOG}
 

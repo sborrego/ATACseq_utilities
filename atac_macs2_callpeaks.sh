@@ -17,8 +17,8 @@ module load macs2/2.0.10
 INPUT_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_final_181213
 INPUT_LIST=${INPUT_DIR}/sorted_nodup_bam_list.txt
 
-PEAK_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/macs_peaks
-RUNLOG_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/macs_peaks/runlogs
+PEAK_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/macs_peaks
+RUNLOG_DIR=${PEAK_DIR}/runlogs
 
 mkdir -p ${PEAK_DIR}
 mkdir -p ${RUNLOG_DIR}
@@ -37,7 +37,7 @@ echo ${INPUT_PREFIX} >> ${RUNLOG}
 macs2 callpeak \
 --treatment ${INPUT} \
 --name ${INPUT_PREFIX} \
---format AUTO \
+--format BAM \
 --nomodel \
 --shift -100 \
 --extsize 200 2>> ${RUNLOG}

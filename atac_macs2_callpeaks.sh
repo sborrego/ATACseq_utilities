@@ -36,7 +36,7 @@ echo ${INPUT_PREFIX} >> ${RUNLOG}
 
 macs2 callpeak \
 --treatment ${INPUT} \
---name ${INPUT_PREFIX} \
+--name ${PEAK_DIR}/${INPUT_PREFIX} \
 --format BAM \
 --nomodel \
 --shift -100 \

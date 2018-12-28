@@ -34,7 +34,7 @@ echo ${INPUT} >> ${RUNLOG}
 echo ${INPUT_PREFIX} >> ${RUNLOG}
 
 
-macs2 callpeak
+macs2 callpeak \
 --treatment ${INPUT} \
 --name ${INPUT_PREFIX} \
 --format AUTO \

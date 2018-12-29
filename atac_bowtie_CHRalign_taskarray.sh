@@ -11,12 +11,11 @@
 
 set -euxo pipefail
 
+# Provide directory name for alignment ($1) on command line
 if [ $# -ne 1 ]; then
     echo "usage: data_dir"
     exit 1
 fi
-
-# Provide directory name for alignment ($1) on command line
 
 module load bowtie2/2.2.7
 module load samtools/1.0
@@ -33,10 +32,10 @@ mkdir -p ${ALIGN_CHR_DIR}
 
 # Logs to keep track of things
 RUNLOG=${ALIGN_DIR}/runlog_chrOnly_align_${SGE_TASK_ID}.txt
-echo "Run by `whoami` on `date`" > ${RUNLOG}
+echo "Run by `whoami` on `date`" >> ${RUNLOG}
 
 FLAG=${ALIGN_DIR}/alignment_chrOnly_errors_${SGE_TASK_ID}.flagstat
-echo "Run by `whoami` on `date`" > ${FLAG}
+echo "Run by `whoami` on `date`" >> ${FLAG}
 
 # File for lists of files to be processed
 LIST_1=${UNALIGN_MITO_DIR}/read1_list.txt

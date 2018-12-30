@@ -21,7 +21,7 @@ GENOME_CHROMS=/som/sborrego/refs/hg38_chroms_only/hg38_chr_only
 EXP_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8
 
 ALIGN_DIR=${EXP_DIR}/alignments/data_trim_clip_noSORT
-UNALIGN_MITO_DIR=${ALIGN_DIR}/trim_data_clipped/mitochondrial_unaligned
+UNALIGN_MITO_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/trim_data_clipped/mitochondrial_unaligned
 
 ALIGN_DIR_2=${EXP_DIR}/analysis_encode/alignments
 ALIGN_CHR_DIR=${ALIGN_DIR_2}/bowtie_output_noSort

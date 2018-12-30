@@ -50,7 +50,7 @@ READ_1=`head -n $SGE_TASK_ID $LIST_1 | tail -n 1`
 READ_2=`head -n $SGE_TASK_ID $LIST_2 | tail -n 1`
 
 PREFIX=`basename ${READ_1} _READ1.fq.gz`
-PREFIX2=`basename ${READ_1} _chrM_unaligned_READ1.fq.gz`
+PREFIX_2=`basename ${READ_1} _chrM_unaligned_READ1.fq.gz`
 
 BAM_FILE=${ALIGN_CHR_DIR}/${PREFIX_2}.bam
 SORTED_BAM_FILE=${ALIGN_SORT_DIR}/${PREFIX_2}.sorted.filtered.bam

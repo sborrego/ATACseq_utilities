@@ -45,11 +45,12 @@ echo ${BAM_OUTPUT} >> ${RUNLOG}
 
 FLAG=${RUNLOG_DIR}/runlog_dedup_sort_${SGE_TASK_ID}.flagstat
 echo "Run by `whoami` on `date`" >> ${FLAG}
+echo ${BAM_OUTPUT} >> ${RUNLOG}
 
 java -Xmx2g -jar ${MARK_DUPS} \
 	INPUT=${BAM_INPUT} \
 	OUTPUT=${BAM_FINAL}.dedup.bam \
-	METRICS_FILE=${DEDUP_METRICS_DIR}/${BAM_FINAL}.metrics.txt \
+	METRICS_FILE=${BAM_FINAL}.metrics.txt \
 	REMOVE_DUPLICATES=true 2>> ${RUNLOG}
 
 samtools flagstat ${BAM_FINAL}.dedup.bam >> ${FLAG}

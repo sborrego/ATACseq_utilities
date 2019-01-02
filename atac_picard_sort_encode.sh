@@ -24,7 +24,7 @@ BAM_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/sorted_
 BAM_LIST=${BAM_DIR}/bam_list.txt
 
 # Output directories
-DEDUP_SORTED_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/alignments/data_dedup_sorted
+DEDUP_SORTED_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/data_dedup_sorted
 DEDUP_METRICS_DIR=${DEDUP_SORTED_DIR}/metrics
 
 mkdir -p ${DEDUP_SORTED_DIR}
@@ -36,6 +36,8 @@ BAM_OUTPUT=`head -n $SGE_TASK_ID $BAM_LIST | tail -n 1 | cut -d/ -f8 | cut -d. -
 BAM_FINAL=${DEDUP_SORTED_DIR}/${BAM_OUTPUT}
 
 RUNLOG_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/runlogs
+mkdir -p ${RUNLOG_DIR}
+
 RUNLOG=${RUNLOG_DIR}/runlog_dedup_sort_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" >> ${RUNLOG}
 echo ${BAM_INPUT} >> ${RUNLOG}

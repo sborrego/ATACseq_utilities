@@ -57,9 +57,9 @@ samtools flagstat ${BAM_FINAL}.dedup.bam >> ${FLAG}
 
 java -Xmx2g -jar ${SORTSAM} \
 	INPUT=${BAM_FINAL}.dedup.bam \
-	OUTPUT=${DEDUP_SORTED_DIR}/${BAM_FINAL}.dedup.sort.bam \
+	OUTPUT=${BAM_FINAL}.dedup.sorted.bam \
 	SORT_ORDER=coordinate \
 	VALIDATION_STRINGENCY=LENIENT 2>> ${RUNLOG}
 
-samtools index ${DEDUP_SORTED_DIR}/${BAM_FINAL}.dedup.sorted.bam
-samtools flagstat ${DEDUP_SORTED_DIR}/${BAM_FINAL}.dedup.sorted.bam >> ${FLAG}
+samtools index ${BAM_FINAL}.dedup.sorted.bam
+samtools flagstat ${BAM_FINAL}.dedup.sorted.bam >> ${FLAG}

@@ -50,7 +50,7 @@ echo ${BAM_OUTPUT} >> ${RUNLOG}
 java -Xmx2g -jar ${MARK_DUPS} \
 	INPUT=${BAM_INPUT} \
 	OUTPUT=${BAM_FINAL}.dedup.bam \
-	METRICS_FILE=${BAM_FINAL}.metrics.txt \
+	METRICS_FILE=${DEDUP_METRICS_DIR}/${BAM_OUTPUT}.metrics.txt \
 	REMOVE_DUPLICATES=true 2>> ${RUNLOG}
 
 samtools flagstat ${BAM_FINAL}.dedup.bam >> ${FLAG}

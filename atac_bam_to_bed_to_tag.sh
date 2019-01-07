@@ -43,7 +43,7 @@ echo ${BAM_OUTPUT} >> ${RUNLOG}
 # Create tagAlign File
 bedtools bamtobed \
 -i ${BAM_INPUT} \
-awk 'BEGIN{OFS="\t"}{$4="N"; $5="1000"; print $0}' \
+| awk 'BEGIN{OFS="\t"}{$4="N"; $5="1000"; print $0}' \
 | gzip -c > ${FINAL_TAG_ALIGN_FILE}.PE2SE.tagAlign.gz 2>> ${RUNLOG}
 
 # Name sorting deduped files for BEDPE file

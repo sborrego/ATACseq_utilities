@@ -18,7 +18,7 @@ module load picard-tools/1.96
 SORTSAM=/data/apps/picard-tools/1.96/SortSam.jar
 
 # Input files
-BAM_LIST=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/data_dedup_sorted/bam_list
+BAM_LIST=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/data_dedup_sorted/bam_list.txt
 
 # Output directories
 TAG_ALIGN_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/tagAlign

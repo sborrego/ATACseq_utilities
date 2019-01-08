@@ -11,7 +11,7 @@
 
 set -euxo pipefail
 
-module load bedtools/2.22
+module load bedtools/2.25
 module load picard-tools/1.96
 
 # Paths to Picard programs

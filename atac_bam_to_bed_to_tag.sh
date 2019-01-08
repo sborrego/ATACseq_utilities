@@ -35,7 +35,7 @@ BAM_OUTPUT=`head -n $SGE_TASK_ID $BAM_LIST | tail -n 1 | cut -d. -f1 | cut -d/ -
 FINAL_TAG_ALIGN_FILE=${TAG_ALIGN_DIR}/${BAM_OUTPUT}
 
 RUNLOG_DIR=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/runlogs
-RUNLOG=${RUNLOG_DIR}/runlog_tagAlign_{SGE_TASK_ID}.txt
+RUNLOG=${RUNLOG_DIR}/runlog_tagAlign_${SGE_TASK_ID}.txt
 echo "Run by `whoami` on `date`" >> ${RUNLOG}
 echo ${BAM_INPUT} >> ${RUNLOG}
 echo ${BAM_OUTPUT} >> ${RUNLOG}

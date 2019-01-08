@@ -27,12 +27,13 @@ TAG_INPUT=`head -n $SGE_TASK_ID $TAG_LIST | tail -n 1`
 TAG_OUTPUT=`head -n $SGE_TASK_ID $TAG_LIST | tail -n 1 | cut -d. -f1 | cut -d/ -f 8 | cut -d_ -f 1`
 
 # Output directory
-PHANTOM_OUTPUT=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/peak
+PHANTOM_OUTPUT=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/peak/xcorrelation
 
 # Using variable names atacseq pipeline
 CC_SCORES_FILE="${PHANTOM_OUTPUT}/${TAG_OUTPUT}.cc.qc"
 CC_PLOT_FILE="${PHANTOM_OUTPUT}/${TAG_OUTPUT}.cc.plot.pdf"
 
+touch ${CC_SCORES_FILE}
 # CC_SCORE FILE format
 # Filename <tab> numReads <tab> estFragLen <tab> corr_estFragLen <tab> PhantomPeak <tab> corr_phantomPeak <tab> argmin_corr <tab> min_corr <tab> phantomPeakCoef <tab> relPhantomPeakCoef <tab> QualityTag
 

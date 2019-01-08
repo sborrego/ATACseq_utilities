@@ -11,7 +11,7 @@
 
 set -euxo pipefail
 
-module load R/3.5
+module load R/3.5.1
 module load boost/1.63.0
 module load samtools
 
@@ -37,7 +37,7 @@ CC_PLOT_FILE="${PHANTOM_OUTPUT}/${TAG_OUTPUT}.cc.plot.pdf"
 # Filename <tab> numReads <tab> estFragLen <tab> corr_estFragLen <tab> PhantomPeak <tab> corr_phantomPeak <tab> argmin_corr <tab> min_corr <tab> phantomPeakCoef <tab> relPhantomPeakCoef <tab> QualityTag
 
 Rscript ${SPP} \
--c=${SUBSAMPLED_TA_FILE} \
+-c=${TAG_INPUT} \
 -p=8 \
 -filtchr=chrM \
 -savp=${CC_PLOT_FILE} \
@@ -45,3 +45,6 @@ Rscript ${SPP} \
 
 sed -r 's/,[^\t]+//g' ${CC_SCORES_FILE} > temp
 mv temp ${CC_SCORES_FILE}
+
+
+#Rscript run_spp.R -c=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/tagAlign/4R109-L8-P2-CGTACTAG.filt.nodup.sample.15.MATE1.tagAlign -filtchr=chrM -savp=test.plot.pdf -out=test.cc.qc

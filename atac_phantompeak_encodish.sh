@@ -29,6 +29,8 @@ TAG_OUTPUT=`head -n $SGE_TASK_ID $TAG_LIST | tail -n 1 | cut -d. -f1 | cut -d/ -
 # Output directory
 PHANTOM_OUTPUT=/som/sborrego/201810_ATACSEQ_MB468_R8/analysis_encode/alignments/peak/xcorrelation
 
+mkdir -p ${PHANTOM_OUTPUT}
+
 # Using variable names atacseq pipeline
 CC_SCORES_FILE="${PHANTOM_OUTPUT}/${TAG_OUTPUT}.cc.qc"
 CC_PLOT_FILE="${PHANTOM_OUTPUT}/${TAG_OUTPUT}.cc.plot.pdf"
@@ -39,7 +41,7 @@ touch ${CC_SCORES_FILE}
 
 Rscript ${SPP} \
 -c=${TAG_INPUT} \
--p=8 \
+-p=12 \
 -filtchr=chrM \
 -savp=${CC_PLOT_FILE} \
 -out=${CC_SCORES_FILE}

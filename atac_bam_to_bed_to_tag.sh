@@ -40,7 +40,7 @@ echo "Run by `whoami` on `date`" >> ${RUNLOG}
 echo ${BAM_INPUT} >> ${RUNLOG}
 echo ${BAM_OUTPUT} >> ${RUNLOG}
 
-Create tagAlign File
+# Create tagAlign File
 bedtools bamtobed \
 -i ${BAM_INPUT} \
 | awk 'BEGIN{OFS="\t"}{$4="N"; $5="1000"; print $0}' \
